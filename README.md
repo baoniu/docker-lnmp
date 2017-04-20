@@ -15,9 +15,9 @@ docker build --tag addcn/nginx -f nginx/Dockerfile .
 #### Run Container
 
 ```shell
-docker run --name mysql -p 3306:3306 -v /root/bo/data/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -it addcn/mysql
-docker run --name php7 -p 9000:9000 -v /var/www/html:/usr/local/nginx/html --link mysql:mysql -it addcn/php7
-docker run --name nginx -p 80:80 -v /var/www/html:/usr/local/nginx/html --link php7:php7 -it addcn/nginx
+sudo docker run --name mysql -p 3306:3306 -v /srv/data/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -itd addcn/mysql
+sudo docker run --name php7 -p 9000:9000 -v /srv/webroot:/usr/local/nginx/html --link mysql:mysql -itd addcn/php7
+sudo docker run --name nginx -p 80:80 -v /srv/webroot:/usr/local/nginx/html -v /srv/config/nginx:/usr/local/nginx/conf/servers -v /srv/logs/nginx:/usr/local/nginx/logs --link php7:php7 -itd addcn/nginx
 ```
 
 #### Test PHP & MySQL
@@ -53,8 +53,3 @@ http://192.168.8.36/test.php
 ![docker-lnmp][1]
 
   [1]: docs/docker-lnmp.png
-
-
-## About me
-
-- 微博 [http://www.weibo.com/addcn](http://www.weibo.com/addcn)
