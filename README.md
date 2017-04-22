@@ -27,7 +27,9 @@ on-failure - container:退出状态非0时重启
 always:始终重启
 ```
 注意事项：
+
 1.用docker自带的--link把多个容器链接在一起，有重启或升级的问题，比如很多容器都依赖于 db 这个容器，然后db容器重启了，重启时docker分配的ip会变，导致其他依赖于db的容器都要重启。
+
 2.--link 链接的容器还有启动顺序的问题， 需要先启动db容器再启动其他依赖于db的容器， 这样导致 --link和--restart=always 不能一起用， 如果一起用会发现宿主机重启了， docker容器并没有全部重启，
 
 #### Test PHP & MySQL
