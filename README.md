@@ -17,7 +17,7 @@ docker build --tag addcn/nginx -f nginx/Dockerfile .
 ```shell
 sudo docker run --name mysql -p 3306:3306 -v /srv/data/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -itd addcn/mysql
 sudo docker run --name php7 -p 9000:9000 -v /srv/webroot:/usr/local/nginx/html --link mysql:mysql -itd addcn/php7
-sudo docker run --name nginx -p 80:80 -v /srv/webroot:/usr/local/nginx/html -v /srv/config/nginx:/usr/local/nginx/conf/servers -v /srv/logs/nginx:/usr/local/nginx/logs --link php7:php7 -itd addcn/nginx
+sudo docker run --name nginx -p 80:80 -p443:443 -p 8080:8080 -v /srv/webroot:/usr/local/nginx/html -v /srv/config/nginx:/usr/local/nginx/conf/servers -v /srv/logs/nginx:/usr/local/nginx/logs --link php7:php7 -itd addcn/nginx
 ```
 #### 其它参数
 ```shell
